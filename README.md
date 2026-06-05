@@ -1,0 +1,132 @@
+# FraudShield — Enterprise Fraud Analytics Platform
+
+Plataforma enterprise de monitoramento e detecção de fraude com frontend React interativo, backend analítico Node.js (MVC), estado global Zustand e filtros dinâmicos em tempo real.
+
+![Stack](https://img.shields.io/badge/React-19-61DAFB)
+![Stack](https://img.shields.io/badge/Zustand-5-764ABC)
+![Stack](https://img.shields.io/badge/Node.js-Express-339933)
+![Stack](https://img.shields.io/badge/Recharts-3-8884d8)
+
+## Visão geral
+
+FraudShield consolida KPIs executivos, análise temporal, categorização de fraudes, score de risco multi-fator, alertas inteligentes, tabela interativa com modal de detalhes e pipeline ML preparado para Isolation Forest — alimentado por 7.506 transações fraudulentas reais do dataset de cartão de crédito.
+
+## Arquitetura
+
+Consulte **[ARCHITECTURE.md](./ARCHITECTURE.md)** para diagrama completo, fluxo de dados e roadmap técnico.
+
+```
+fraud-lakehouse-platform/
+├── backend/
+│   ├── server.js
+│   ├── routes/api.js
+│   ├── controllers/         # health, analytics, transactions, ml
+│   ├── services/            # analyticsService, mlService
+│   ├── middleware/          # logger, ensureReady
+│   ├── database/            # dataStore cache
+│   └── lib/                 # riskEngine, filters, dataStore core
+├── frontend/src/
+│   ├── charts/
+│   ├── components/
+│   ├── contexts/            # barrel exports
+│   ├── stores/fraudStore.js # Zustand global state
+│   ├── services/api.js      # API centralizada + retry
+│   ├── styles/global.css
+│   └── pages/               # 6 rotas lazy-loaded
+└── data/gold + data/raw
+```
+
+## API Endpoints
+
+| Método | Rota | Descrição |
+|--------|------|-----------|
+| GET | `/health` | Status + estatísticas |
+| GET | `/kpis` | KPIs (suporta filtros) |
+| GET | `/fraudes/categorias` | Fraudes por categoria |
+| GET | `/fraudes/horarios` | Fraudes por hora |
+| GET | `/transactions` | Transações paginadas |
+| GET | `/transacoes` | Alias PT |
+| GET | `/alertas` | Alertas dinâmicos |
+| GET | `/modelos` | Saúde dos modelos ML |
+| GET | `/analytics/summary` | Resumo + distribuição de risco |
+| GET | `/ml/metrics` | Precision, recall, F1, confusion matrix |
+| GET | `/risk-analysis` | Aggregated risk intelligence |
+| GET | `/ml-predictions` | ML predictions with explanations |
+| GET | `/anomalies` | Top behavioral anomalies |
+| GET | `/fraud-insights` | AI insights + live alerts |
+| GET | `/data-analysis` | Statistical dataset report |
+
+Consulte **[docs/ML_MODELS.md](./docs/ML_MODELS.md)** para documentação completa dos modelos.
+
+## AI Monitoring
+
+Nova página **AI Monitoring** (`/ai-monitoring`) com:
+- AI Risk Score Cards
+- Fraud Probability / Anomaly Distribution
+- Threat Timeline
+- Fraud Intelligence Insights
+- Live AI Alerts
+
+Transações enriquecidas com: `fraud_probability`, `ml_prediction`, `anomaly_score`, `severity`, `ai_confidence`, `risk_explanation`
+
+### Filtros (query params)
+
+```
+?period=24h|7d|30d|all
+?category=grocery_pos
+?status=blocked|review|flagged
+?risk_level=CRITICAL|HIGH|MEDIUM|LOW
+?region=West|South|Northeast|Midwest
+?search=transaction_id
+?page=1&limit=20&sort=timestamp&order=desc
+```
+
+## Como executar
+
+### Backend (~40s primeira carga do CSV)
+
+```bash
+cd backend
+npm install
+npm start
+```
+
+Aguarde: `[DATA] Ready: { transactions: 7506, ... }`
+
+### Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Acesse: **http://localhost:5173** — proxy `/api` → `localhost:3001`
+
+## Funcionalidades
+
+- Estado global Zustand (filtros + KPIs + alertas sincronizados)
+- Filtros globais: período, categoria, status, risk level, região, busca
+- Modal de detalhes ao clicar em transação
+- Lazy loading de páginas (code splitting)
+- 6 páginas React Router + sidebar persistente
+- Search global (⌘K) + Dark/Light mode
+- Skeleton loading, empty states, retry automático
+- Pipeline ML (Isolation Forest ready)
+- Visual premium claro estilo enterprise SaaS
+
+## Stack
+
+| Camada | Tecnologias |
+|--------|-------------|
+| Frontend | React 19, Vite 8, Tailwind 4, Recharts, Zustand, Axios |
+| Backend | Node.js, Express, csv-parse |
+| Dados | JSON gold layer + CSV raw (7.506 fraudes) |
+
+## Backups
+
+Alterações são versionadas em `backups/refactor-YYYYMMDD-HHmmss/`
+
+## Licença
+
+Projeto de portfólio — dados para fins educacionais e demonstração técnica.

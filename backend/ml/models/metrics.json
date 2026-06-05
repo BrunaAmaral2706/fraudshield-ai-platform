@@ -1,0 +1,139 @@
+{
+  "models": {
+    "isolation_forest": {
+      "algorithm": "IsolationForest",
+      "version": "1.2.0",
+      "status": "production"
+    },
+    "random_forest": {
+      "algorithm": "RandomForest",
+      "version": "1.1.0",
+      "status": "production"
+    },
+    "xgboost": {
+      "algorithm": "XGBoost",
+      "version": "1.0.0-stub",
+      "status": "staging"
+    }
+  },
+  "metrics": {
+    "precision": 1,
+    "recall": 0.6567,
+    "f1_score": 0.7928,
+    "accuracy": 0.688,
+    "auc_roc": 0.8568
+  },
+  "confusion_matrix": {
+    "tp": 4480,
+    "fp": 0,
+    "fn": 2342,
+    "tn": 684
+  },
+  "roc_curve": [
+    {
+      "threshold": 0,
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "threshold": 0.05,
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "threshold": 0.1,
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "threshold": 0.15,
+      "fpr": 1,
+      "tpr": 1
+    },
+    {
+      "threshold": 0.2,
+      "fpr": 0.9706,
+      "tpr": 1
+    },
+    {
+      "threshold": 0.25,
+      "fpr": 0.9706,
+      "tpr": 1
+    },
+    {
+      "threshold": 0.3,
+      "fpr": 0.9412,
+      "tpr": 1
+    },
+    {
+      "threshold": 0.35,
+      "fpr": 0.8235,
+      "tpr": 1
+    },
+    {
+      "threshold": 0.4,
+      "fpr": 0.6765,
+      "tpr": 1
+    },
+    {
+      "threshold": 0.45,
+      "fpr": 0.4118,
+      "tpr": 1
+    },
+    {
+      "threshold": 0.5,
+      "fpr": 0.2941,
+      "tpr": 1
+    },
+    {
+      "threshold": 0.55,
+      "fpr": 0,
+      "tpr": 1
+    },
+    {
+      "threshold": 0.6,
+      "fpr": 0,
+      "tpr": 0.9557
+    },
+    {
+      "threshold": 0.65,
+      "fpr": 0,
+      "tpr": 0.7505
+    },
+    {
+      "threshold": 0.7,
+      "fpr": 0,
+      "tpr": 0.6765
+    },
+    {
+      "threshold": 0.75,
+      "fpr": 0,
+      "tpr": 0.6497
+    },
+    {
+      "threshold": 0.8,
+      "fpr": 0,
+      "tpr": 0.5741
+    },
+    {
+      "threshold": 0.85,
+      "fpr": 0,
+      "tpr": 0.0232
+    },
+    {
+      "threshold": 0.9,
+      "fpr": 0,
+      "tpr": 0.0021
+    }
+  ],
+  "summary": {
+    "total_scored": 7506,
+    "fraud_predictions": 7263,
+    "anomalies_detected": 4545,
+    "high_risk_count": 6823,
+    "critical_count": 4814,
+    "avg_fraud_probability": 0.7293,
+    "avg_ai_confidence": 84.54
+  },
+  "trained_at": "2026-06-05T21:11:28.512Z"
+}
