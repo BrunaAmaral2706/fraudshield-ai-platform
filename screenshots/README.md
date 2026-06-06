@@ -7,7 +7,7 @@ Adicione aqui as capturas de tela do FraudShield para exibição no README do Gi
 | `overview.png` | Overview (`/`) | 1920×1080 |
 | `analytics.png` | Analytics (`/analytics`) | 1920×1080 |
 | `transactions.png` | Transactions (`/transactions`) | 1920×1080 |
-| `alerts.png` | Alerts (`/alerts`) | 1920×1080 |
+| `alertas.png` | Alerts (`/alerts`) | 1920×1080 |
 | `ai-monitoring.png` | AI Monitoring (`/ai-monitoring`) | 1920×1080 |
 | `models.png` | Models (`/models`) | 1920×1080 |
 

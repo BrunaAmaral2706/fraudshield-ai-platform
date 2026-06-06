@@ -1,182 +1,284 @@
-# FraudShield — Enterprise Fraud Analytics Platform
+<div align="center">
 
-## Dashboard Preview
+# FraudShield
 
-Visual tour da plataforma enterprise antifraude — **fraud analytics**, **AI monitoring**, **risk engine**, **machine learning** e **executive dashboard** em uma única superfície de observabilidade.
+### Enterprise Fraud Analytics & AI Risk Intelligence Platform
 
-| Módulo | Descrição |
-|--------|-----------|
-| Overview | KPIs executivos, fraud rate e volume financeiro em tempo real |
-| Analytics | Análise temporal, categorias e padrões de fraude |
-| Transactions | Tabela dinâmica com risk score, AI confidence e modal de detalhes |
-| Alerts | Alertas dinâmicos com severidade e badges contextuais |
-| AI Monitoring | Distribuição de risco, probabilidade de fraude e anomaly timeline |
-| Models | Métricas ML — Isolation Forest, Random Forest e pipeline de inferência |
+**Real-time fraud observability · ML-powered anomaly detection · Multi-factor risk scoring**
 
-![Overview — Executive fraud analytics dashboard](./screenshots/overview.png)
+[![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
+[![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)](https://nodejs.org/)
+[![Python](https://img.shields.io/badge/Python-ML-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org/)
+[![ML](https://img.shields.io/badge/Isolation_Forest-Risk_Engine-FF6F00?style=for-the-badge)](./docs/ML_MODELS.md)
+[![Lakehouse](https://img.shields.io/badge/Medallion-Lakehouse-0078D4?style=for-the-badge)](./data/README.md)
 
-![Analytics — Temporal fraud patterns and category breakdown](./screenshots/analytics.png)
+[Live Demo](#-quick-start) · [Architecture](./ARCHITECTURE.md) · [ML Models](./docs/ML_MODELS.md) · [API Reference](#-api-endpoints)
 
-![Transactions — Dynamic table with risk score and AI confidence](./screenshots/transactions.png)
-
-![Alerts — Real-time fraud alerts with severity levels](./screenshots/alerts.png)
-
-![AI Monitoring — Risk distribution, fraud probability and anomaly timeline](./screenshots/ai-monitoring.png)
-
-![Models — Machine learning metrics and model health](./screenshots/models.png)
+</div>
 
 ---
 
-Plataforma enterprise de monitoramento e detecção de fraude com frontend React interativo, backend analítico Node.js (MVC), estado global Zustand e filtros dinâmicos em tempo real.
+## Overview
 
-![Stack](https://img.shields.io/badge/React-19-61DAFB)
-![Stack](https://img.shields.io/badge/Zustand-5-764ABC)
-![Stack](https://img.shields.io/badge/Node.js-Express-339933)
-![Stack](https://img.shields.io/badge/Recharts-3-8884d8)
+**FraudShield** is an enterprise-grade **fraud intelligence platform** designed for fintech operations, risk teams, and fraud analysts. It combines executive dashboards, AI monitoring, behavioral anomaly detection, and a multi-factor **Risk Engine** in a single observability surface — the kind of tooling you'd expect from a modern **fraud analytics SaaS**.
 
-## Visão geral
+> Built to demonstrate production patterns: REST APIs, lakehouse data layers, ML inference pipelines, global filter sync, and explainable AI scoring.
 
-FraudShield consolida KPIs executivos, análise temporal, categorização de fraudes, score de risco multi-fator, alertas inteligentes, tabela interativa com modal de detalhes e pipeline ML — alimentado por **750 transações fraudulentas** (dataset demo de 5.000 linhas, otimizado para GitHub).
+| Metric | Value |
+|--------|-------|
+| Fraud transactions analyzed | **750** |
+| Demo dataset | 5,000 rows (GitHub-optimized) |
+| REST endpoints | **12+** |
+| Risk levels | LOW · MEDIUM · HIGH · CRITICAL |
+| ML models | Isolation Forest + Random Forest ensemble |
 
-## Arquitetura
+---
 
-Consulte **[ARCHITECTURE.md](./ARCHITECTURE.md)** para diagrama completo, fluxo de dados e roadmap técnico.
+## Business Impact
+
+Financial institutions lose billions annually to payment fraud. FraudShield addresses the operational gap between **raw transaction data** and **actionable risk intelligence**.
+
+| Challenge | FraudShield Response |
+|-----------|---------------------|
+| **Fraud visibility** | Executive KPIs — fraud rate, volume, ticket size — updated in real time with global filters |
+| **Risk intelligence** | Multi-factor Risk Engine scoring amount, velocity, category, and suspicious hours |
+| **Anomaly detection** | Isolation Forest identifies behavioral outliers across 750+ fraud transactions |
+| **Observability** | Unified dashboard for alerts, ML metrics, and transaction drill-down |
+| **Fintech operations** | REST API layer ready for integration with payment processors, CRM, and case management |
+
+**Outcome:** Analysts move from reactive review to **proactive fraud monitoring** — with severity-ranked alerts, AI confidence scores, and explainable risk breakdowns per transaction.
+
+---
+
+## Key Features
+
+<table>
+<tr>
+<td width="50%" valign="top">
+
+### AI Fraud Monitoring
+- Dedicated `/ai-monitoring` command center
+- Fraud probability distribution
+- Anomaly timeline & risk heatmap
+- Live AI-generated alerts
+
+### Risk Score Engine
+- Multi-factor scoring (amount, hour, category, velocity)
+- Severity classification: `LOW` → `CRITICAL`
+- Explainable risk breakdown per transaction
+- Dynamic alert generation
+
+</td>
+<td width="50%" valign="top">
+
+### ML Pipeline
+- Feature engineering at scale
+- Isolation Forest anomaly detection
+- Random Forest fraud prediction
+- Precision, recall, F1 metrics dashboard
+
+### Enterprise Frontend
+- React 19 + Vite + Tailwind 4
+- Zustand global state with filter sync
+- Lazy-loaded routes, skeleton loading
+- Dark/light mode · Global search (⌘K)
+
+</td>
+</tr>
+<tr>
+<td valign="top">
+
+### REST Analytics API
+- 12+ endpoints with query filters
+- Paginated transactions
+- Risk analysis & ML predictions
+- Health checks & request logging
+
+</td>
+<td valign="top">
+
+### Lakehouse Architecture
+- Medallion layers: Raw → Bronze → Silver → Gold
+- Python ETL pipelines
+- Gold JSON consumed by Node.js backend
+- Regenerable demo dataset (≤5k rows)
+
+</td>
+</tr>
+</table>
+
+---
+
+## Platform Preview
+
+<table>
+<tr>
+<td align="center" width="50%">
+<strong>Overview</strong><br/>
+<em>Executive KPIs · Fraud rate · Financial volume</em><br/><br/>
+<img src="./screenshots/overview.png" alt="FraudShield Overview Dashboard" width="100%"/>
+</td>
+<td align="center" width="50%">
+<strong>Analytics</strong><br/>
+<em>Temporal patterns · Category breakdown</em><br/><br/>
+<img src="./screenshots/analytics.png" alt="FraudShield Analytics" width="100%"/>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>Transactions</strong><br/>
+<em>Risk score · AI confidence · Detail modal</em><br/><br/>
+<img src="./screenshots/transactions.png" alt="FraudShield Transactions" width="100%"/>
+</td>
+<td align="center">
+<strong>Alerts</strong><br/>
+<em>Dynamic severity · Contextual badges</em><br/><br/>
+<img src="./screenshots/alertas.png" alt="FraudShield Alerts" width="100%"/>
+</td>
+</tr>
+<tr>
+<td align="center">
+<strong>⭐ AI Monitoring</strong><br/>
+<em>Risk distribution · Fraud probability · Anomaly timeline</em><br/><br/>
+<img src="./screenshots/ai-monitoring.png" alt="FraudShield AI Monitoring" width="100%"/>
+</td>
+<td align="center">
+<strong>⭐ Risk Engine & ML Models</strong><br/>
+<em>Model health · Isolation Forest metrics · Pipeline status</em><br/><br/>
+<img src="./screenshots/models.png" alt="FraudShield ML Models" width="100%"/>
+</td>
+</tr>
+</table>
+
+---
+
+## Architecture
+
+```mermaid
+flowchart LR
+  subgraph Ingest["Data Pipeline"]
+    RAW[Raw CSV] --> BRZ[Bronze]
+    BRZ --> SLV[Silver]
+    SLV --> GLD[Gold JSON]
+  end
+
+  subgraph Backend["Node.js API"]
+    GLD --> DS[(dataStore)]
+    CSV[Raw CSV] --> DS
+    DS --> ML[ML Pipeline]
+    ML --> API[REST Endpoints]
+  end
+
+  subgraph Frontend["React SPA"]
+    API --> UI[Dashboards]
+    UI --> AI[AI Monitoring]
+    UI --> RE[Risk Engine UI]
+  end
+```
 
 ```
 fraud-lakehouse-platform/
-├── backend/
-│   ├── server.js
-│   ├── routes/api.js
-│   ├── controllers/         # health, analytics, transactions, ml
-│   ├── services/            # analyticsService, mlService
-│   ├── middleware/          # logger, ensureReady
-│   ├── database/            # dataStore cache
-│   └── lib/                 # riskEngine, filters, dataStore core
-├── frontend/src/
-│   ├── charts/
-│   ├── components/
-│   ├── contexts/            # barrel exports
-│   ├── stores/fraudStore.js # Zustand global state
-│   ├── services/api.js      # API centralizada + retry
-│   ├── styles/global.css
-│   └── pages/               # 6 rotas lazy-loaded
-├── docs/                    # MVP audit, checklist, ML docs
-├── ml/                      # Lakehouse pipelines (bronze/silver/gold)
-├── screenshots/             # Preview images for GitHub README
-└── data/                    # raw CSV + gold JSON (demo ≤5k rows)
+├── frontend/          React 19 · Vite · Tailwind · Recharts · Zustand
+├── backend/         Express MVC · Risk Engine · ML inference
+├── ml/pipelines/    Bronze → Silver → Gold (Python)
+├── data/            Medallion layers (raw + gold JSON)
+├── docs/            Architecture · ML · Recovery · Portfolio
+└── screenshots/     Platform preview images
 ```
+
+Full diagram → **[ARCHITECTURE.md](./ARCHITECTURE.md)**
+
+---
 
 ## API Endpoints
 
-| Método | Rota | Descrição |
-|--------|------|-----------|
-| GET | `/health` | Status + estatísticas |
-| GET | `/kpis` | KPIs (suporta filtros) |
-| GET | `/fraudes/categorias` | Fraudes por categoria |
-| GET | `/fraudes/horarios` | Fraudes por hora |
-| GET | `/transactions` | Transações paginadas |
-| GET | `/transacoes` | Alias PT |
-| GET | `/alertas` | Alertas dinâmicos |
-| GET | `/modelos` | Saúde dos modelos ML |
-| GET | `/analytics/summary` | Resumo + distribuição de risco |
-| GET | `/ml/metrics` | Precision, recall, F1, confusion matrix |
-| GET | `/risk-analysis` | Aggregated risk intelligence |
-| GET | `/ml-predictions` | ML predictions with explanations |
-| GET | `/anomalies` | Top behavioral anomalies |
-| GET | `/fraud-insights` | AI insights + live alerts |
-| GET | `/data-analysis` | Statistical dataset report |
+| Method | Route | Description |
+|--------|-------|-------------|
+| `GET` | `/health` | Platform status & record counts |
+| `GET` | `/kpis` | Executive KPIs (filter-aware) |
+| `GET` | `/transactions` | Paginated fraud transactions |
+| `GET` | `/fraudes/categorias` | Fraud by category |
+| `GET` | `/fraudes/horarios` | Fraud by hour |
+| `GET` | `/alertas` | Dynamic severity alerts |
+| `GET` | `/modelos` | ML model health |
+| `GET` | `/analytics/summary` | Risk distribution summary |
+| `GET` | `/risk-analysis` | Aggregated risk intelligence |
+| `GET` | `/ml-predictions` | Predictions + explanations |
+| `GET` | `/anomalies` | Top behavioral anomalies |
+| `GET` | `/fraud-insights` | AI insights & live alerts |
+| `GET` | `/ml/metrics` | Precision · Recall · F1 · Confusion matrix |
 
-Consulte **[docs/ML_MODELS.md](./docs/ML_MODELS.md)** para documentação completa dos modelos.
+**Global filters:** `period` · `category` · `status` · `risk_level` · `region` · `search` · pagination
 
-## AI Monitoring
+---
 
-Nova página **AI Monitoring** (`/ai-monitoring`) com:
-- AI Risk Score Cards
-- Fraud Probability / Anomaly Distribution
-- Threat Timeline
-- Fraud Intelligence Insights
-- Live AI Alerts
+## Quick Start
 
-Transações enriquecidas com: `fraud_probability`, `ml_prediction`, `anomaly_score`, `severity`, `ai_confidence`, `risk_explanation`
-
-### Filtros (query params)
-
-```
-?period=24h|7d|30d|all
-?category=grocery_pos
-?status=blocked|review|flagged
-?risk_level=CRITICAL|HIGH|MEDIUM|LOW
-?region=West|South|Northeast|Midwest
-?search=transaction_id
-?page=1&limit=20&sort=timestamp&order=desc
-```
-
-## Data Pipeline (Lakehouse)
-
-Dataset leve para portfólio — máximo **5.000 linhas**, regenerável localmente:
+### 1 · Data pipeline (optional — gold JSON included)
 
 ```bash
 pip install -r ml/requirements.txt
 python ml/pipelines/run_pipeline.py
 ```
 
-| Camada | Saída | Git |
-|--------|-------|-----|
-| Raw | `data/raw/credit_card_transactions.csv` | ✅ commit (~481 KB) |
-| Bronze | `data/bronze/fraud_raw_*.parquet` | ❌ gitignore |
-| Silver | `data/silver/fraud_clean.parquet` | ❌ gitignore |
-| Gold | `data/gold/*.json` | ✅ commit (backend lê estes) |
-
-Consulte **[data/README.md](./data/README.md)** e **[docs/RECOVERY_REPORT.md](./docs/RECOVERY_REPORT.md)**.
-
-## Como executar
-
-### Backend (~2s com dataset demo)
+### 2 · Backend
 
 ```bash
-cd backend
-npm install
-npm start
+cd backend && npm install && npm start
+# Wait for: [DATA] Ready: { transactions: 750, ... }
 ```
 
-Aguarde: `[DATA] Ready: { transactions: 750, ... }`
-
-### Frontend
+### 3 · Frontend
 
 ```bash
-cd frontend
-npm install
-npm run dev
+cd frontend && npm install && npm run dev
+# Open http://localhost:5173
 ```
 
-Acesse: **http://localhost:5173** — proxy `/api` → `localhost:3001`
+### 4 · Validate APIs
 
-## Funcionalidades
+```bash
+node backend/scripts/validate-api.js
+# Expected: 12 passed, 0 failed
+```
 
-- Estado global Zustand (filtros + KPIs + alertas sincronizados)
-- Filtros globais: período, categoria, status, risk level, região, busca
-- Modal de detalhes ao clicar em transação
-- Lazy loading de páginas (code splitting)
-- 6 páginas React Router + sidebar persistente
-- Search global (⌘K) + Dark/Light mode
-- Skeleton loading, empty states, retry automático
-- Pipeline ML (Isolation Forest ready)
-- Visual premium claro estilo enterprise SaaS
+---
 
-## Stack
+## Tech Stack
 
-| Camada | Tecnologias |
-|--------|-------------|
-| Frontend | React 19, Vite 8, Tailwind 4, Recharts, Zustand, Axios |
-| Backend | Node.js, Express, csv-parse |
-| Dados | JSON gold layer + CSV raw (7.506 fraudes) |
+| Layer | Technologies |
+|-------|-------------|
+| **Frontend** | React 19, Vite 8, Tailwind 4, Recharts, Zustand, Axios |
+| **Backend** | Node.js, Express, MVC architecture |
+| **ML / AI** | Isolation Forest, Random Forest, feature engineering, inference pipeline |
+| **Data** | Medallion lakehouse, Python ETL, Gold JSON + CSV |
+| **Risk** | Multi-factor scoring engine, explainable AI, severity classification |
 
-## Backups
+---
 
-Alterações são versionadas em `backups/refactor-YYYYMMDD-HHmmss/`
+## Documentation
 
-## Licença
+| Document | Description |
+|----------|-------------|
+| [ARCHITECTURE.md](./ARCHITECTURE.md) | System design & data flow |
+| [docs/ML_MODELS.md](./docs/ML_MODELS.md) | ML pipeline & model details |
+| [docs/MVP_AUDIT.md](./docs/MVP_AUDIT.md) | Feature audit report |
+| [docs/RECOVERY_REPORT.md](./docs/RECOVERY_REPORT.md) | Data recovery & lakehouse rebuild |
+| [docs/GIT_SAFE_WORKFLOW.md](./docs/GIT_SAFE_WORKFLOW.md) | Git best practices (Windows) |
+| [docs/LINKEDIN_POSITIONING.md](./docs/LINKEDIN_POSITIONING.md) | LinkedIn & portfolio copy |
 
-Projeto de portfólio — dados para fins educacionais e demonstração técnica.
-# fraudshield-ai-platform
-Enterprise Fraud Analytics &amp; AI Monitoring Platform built with React, Node.js, Python and Machine Learning.
+---
+
+## License
+
+Portfolio project — demo data for educational and technical demonstration purposes.
+
+---
+
+<div align="center">
+
+**FraudShield** · Enterprise Fraud Analytics · AI Risk Intelligence · Built for fintech-grade observability
+
+⭐ If this project demonstrates the kind of engineering you're looking for, consider starring the repo.
+
+</div>
