@@ -1,20 +1,8 @@
-import pandas as pd
-from datetime import datetime
+"""Legacy wrapper — use ml/pipelines/ingest_data.py"""
+import subprocess
+import sys
+from pathlib import Path
 
-print("Iniciando ingestão Bronze...")
-
-INPUT_FILE = "data/raw/credit_card_transactions.csv"
-
-df = pd.read_csv(INPUT_FILE)
-
-print(f"Linhas carregadas: {len(df)}")
-print(f"Colunas encontradas: {len(df.columns)}")
-
-today = datetime.now().strftime("%Y%m%d")
-
-output_path = f"data/bronze/fraud_raw_{today}.parquet"
-
-df.to_parquet(output_path, index=False)
-
-print(f"Arquivo salvo em: {output_path}")
-print("Camada Bronze finalizada.")
+ROOT = Path(__file__).resolve().parents[3]
+script = ROOT / "ml" / "pipelines" / "ingest_data.py"
+sys.exit(subprocess.call([sys.executable, str(script)], cwd=str(ROOT)))

@@ -1,1 +1,70 @@
-node_modules
+# FraudShield — Git Ignore (GitHub-safe)
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Build outputs
+dist/
+dist-ssr/
+build/
+*.local
+
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# Logs & cache
+logs/
+*.log
+npm-debug.log*
+.cache/
+.parcel-cache/
+.vite/
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Editor local history
+.history/
+
+# Backups (local snapshots)
+backups/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+*.pkl
+*.joblib
+
+# Large / regenerable data (keep gold JSON + demo CSV)
+data/bronze/
+data/silver/
+data/gold/*.parquet
+
+# Optional: ignore raw CSV if you regenerate locally
+# data/raw/*.csv
+
+# Keep demo assets for GitHub
+!data/raw/.gitkeep
+!data/bronze/.gitkeep
+!data/silver/.gitkeep
+!data/gold/.gitkeep
+!data/gold/*.json
+!data/README.md
+
+# ML artifacts (regenerated at backend startup)
+backend/ml/models/metrics_python.json
+
+# Screenshots — add PNGs manually before commit
+# !screenshots/*.png

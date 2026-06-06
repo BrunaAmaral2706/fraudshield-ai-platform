@@ -18,16 +18,16 @@
   },
   "metrics": {
     "precision": 1,
-    "recall": 0.6567,
-    "f1_score": 0.7928,
-    "accuracy": 0.688,
-    "auc_roc": 0.8568
+    "recall": 0.5465,
+    "f1_score": 0.7068,
+    "accuracy": 0.896,
+    "auc_roc": 0.818
   },
   "confusion_matrix": {
-    "tp": 4480,
+    "tp": 94,
     "fp": 0,
-    "fn": 2342,
-    "tn": 684
+    "fn": 78,
+    "tn": 578
   },
   "roc_curve": [
     {
@@ -52,88 +52,73 @@
     },
     {
       "threshold": 0.2,
-      "fpr": 0.9706,
+      "fpr": 1,
       "tpr": 1
     },
     {
       "threshold": 0.25,
-      "fpr": 0.9706,
+      "fpr": 1,
       "tpr": 1
     },
     {
       "threshold": 0.3,
-      "fpr": 0.9412,
+      "fpr": 1,
       "tpr": 1
     },
     {
       "threshold": 0.35,
-      "fpr": 0.8235,
+      "fpr": 1,
       "tpr": 1
     },
     {
       "threshold": 0.4,
-      "fpr": 0.6765,
+      "fpr": 1,
       "tpr": 1
     },
     {
       "threshold": 0.45,
-      "fpr": 0.4118,
+      "fpr": 0.812,
       "tpr": 1
     },
     {
       "threshold": 0.5,
-      "fpr": 0.2941,
+      "fpr": 0.6391,
       "tpr": 1
     },
     {
       "threshold": 0.55,
-      "fpr": 0,
+      "fpr": 0.6391,
       "tpr": 1
     },
     {
       "threshold": 0.6,
-      "fpr": 0,
-      "tpr": 0.9557
+      "fpr": 0.6391,
+      "tpr": 1
     },
     {
       "threshold": 0.65,
       "fpr": 0,
-      "tpr": 0.7505
+      "tpr": 0.72
     },
     {
       "threshold": 0.7,
       "fpr": 0,
-      "tpr": 0.6765
+      "tpr": 0.235
     },
     {
       "threshold": 0.75,
       "fpr": 0,
-      "tpr": 0.6497
-    },
-    {
-      "threshold": 0.8,
-      "fpr": 0,
-      "tpr": 0.5741
-    },
-    {
-      "threshold": 0.85,
-      "fpr": 0,
-      "tpr": 0.0232
-    },
-    {
-      "threshold": 0.9,
-      "fpr": 0,
-      "tpr": 0.0021
+      "tpr": 0.04
     }
   ],
   "summary": {
-    "total_scored": 7506,
-    "fraud_predictions": 7263,
-    "anomalies_detected": 4545,
-    "high_risk_count": 6823,
-    "critical_count": 4814,
-    "avg_fraud_probability": 0.7293,
-    "avg_ai_confidence": 84.54
+    "total_scored": 750,
+    "fraud_predictions": 725,
+    "anomalies_detected": 404,
+    "high_risk_count": 400,
+    "critical_count": 172,
+    "avg_fraud_probability": 0.6142,
+    "avg_ai_confidence": 69.47
   },
-  "trained_at": "2026-06-05T21:11:28.512Z"
+  "trained_at": "2026-06-06T17:34:47.704Z"
 }

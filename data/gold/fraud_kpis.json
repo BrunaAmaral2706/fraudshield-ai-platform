@@ -1,0 +1,9 @@
+[
+  {
+    "total_transacoes": 5000,
+    "total_fraudes": 750,
+    "taxa_fraude": 15.0,
+    "volume_total": 5196246.709999999,
+    "ticket_medio": 1039.249342
+  }
+]

@@ -1,5 +1,32 @@
 # FraudShield — Enterprise Fraud Analytics Platform
 
+## Dashboard Preview
+
+Visual tour da plataforma enterprise antifraude — **fraud analytics**, **AI monitoring**, **risk engine**, **machine learning** e **executive dashboard** em uma única superfície de observabilidade.
+
+| Módulo | Descrição |
+|--------|-----------|
+| Overview | KPIs executivos, fraud rate e volume financeiro em tempo real |
+| Analytics | Análise temporal, categorias e padrões de fraude |
+| Transactions | Tabela dinâmica com risk score, AI confidence e modal de detalhes |
+| Alerts | Alertas dinâmicos com severidade e badges contextuais |
+| AI Monitoring | Distribuição de risco, probabilidade de fraude e anomaly timeline |
+| Models | Métricas ML — Isolation Forest, Random Forest e pipeline de inferência |
+
+![Overview — Executive fraud analytics dashboard](./screenshots/overview.png)
+
+![Analytics — Temporal fraud patterns and category breakdown](./screenshots/analytics.png)
+
+![Transactions — Dynamic table with risk score and AI confidence](./screenshots/transactions.png)
+
+![Alerts — Real-time fraud alerts with severity levels](./screenshots/alerts.png)
+
+![AI Monitoring — Risk distribution, fraud probability and anomaly timeline](./screenshots/ai-monitoring.png)
+
+![Models — Machine learning metrics and model health](./screenshots/models.png)
+
+---
+
 Plataforma enterprise de monitoramento e detecção de fraude com frontend React interativo, backend analítico Node.js (MVC), estado global Zustand e filtros dinâmicos em tempo real.
 
 ![Stack](https://img.shields.io/badge/React-19-61DAFB)
@@ -9,7 +36,7 @@ Plataforma enterprise de monitoramento e detecção de fraude com frontend React
 
 ## Visão geral
 
-FraudShield consolida KPIs executivos, análise temporal, categorização de fraudes, score de risco multi-fator, alertas inteligentes, tabela interativa com modal de detalhes e pipeline ML preparado para Isolation Forest — alimentado por 7.506 transações fraudulentas reais do dataset de cartão de crédito.
+FraudShield consolida KPIs executivos, análise temporal, categorização de fraudes, score de risco multi-fator, alertas inteligentes, tabela interativa com modal de detalhes e pipeline ML — alimentado por **750 transações fraudulentas** (dataset demo de 5.000 linhas, otimizado para GitHub).
 
 ## Arquitetura
 
@@ -33,7 +60,10 @@ fraud-lakehouse-platform/
 │   ├── services/api.js      # API centralizada + retry
 │   ├── styles/global.css
 │   └── pages/               # 6 rotas lazy-loaded
-└── data/gold + data/raw
+├── docs/                    # MVP audit, checklist, ML docs
+├── ml/                      # Lakehouse pipelines (bronze/silver/gold)
+├── screenshots/             # Preview images for GitHub README
+└── data/                    # raw CSV + gold JSON (demo ≤5k rows)
 ```
 
 ## API Endpoints
@@ -81,9 +111,27 @@ Transações enriquecidas com: `fraud_probability`, `ml_prediction`, `anomaly_sc
 ?page=1&limit=20&sort=timestamp&order=desc
 ```
 
+## Data Pipeline (Lakehouse)
+
+Dataset leve para portfólio — máximo **5.000 linhas**, regenerável localmente:
+
+```bash
+pip install -r ml/requirements.txt
+python ml/pipelines/run_pipeline.py
+```
+
+| Camada | Saída | Git |
+|--------|-------|-----|
+| Raw | `data/raw/credit_card_transactions.csv` | ✅ commit (~481 KB) |
+| Bronze | `data/bronze/fraud_raw_*.parquet` | ❌ gitignore |
+| Silver | `data/silver/fraud_clean.parquet` | ❌ gitignore |
+| Gold | `data/gold/*.json` | ✅ commit (backend lê estes) |
+
+Consulte **[data/README.md](./data/README.md)** e **[docs/RECOVERY_REPORT.md](./docs/RECOVERY_REPORT.md)**.
+
 ## Como executar
 
-### Backend (~40s primeira carga do CSV)
+### Backend (~2s com dataset demo)
 
 ```bash
 cd backend
@@ -91,7 +139,7 @@ npm install
 npm start
 ```
 
-Aguarde: `[DATA] Ready: { transactions: 7506, ... }`
+Aguarde: `[DATA] Ready: { transactions: 750, ... }`
 
 ### Frontend
 

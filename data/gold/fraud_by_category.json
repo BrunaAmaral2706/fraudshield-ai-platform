@@ -1,0 +1,26 @@
+[
+  {
+    "category": "grocery_pos",
+    "qtd_fraudes": 201,
+    "volume_fraude": 1208323.67,
+    "category_raw": "grocery_pos"
+  },
+  {
+    "category": "misc_net",
+    "qtd_fraudes": 186,
+    "volume_fraude": 1054606.08,
+    "category_raw": "misc_net"
+  },
+  {
+    "category": "shopping_net",
+    "qtd_fraudes": 184,
+    "volume_fraude": 1163607.04,
+    "category_raw": "shopping_net"
+  },
+  {
+    "category": "shopping_pos",
+    "qtd_fraudes": 179,
+    "volume_fraude": 898529.36,
+    "category_raw": "shopping_pos"
+  }
+]
