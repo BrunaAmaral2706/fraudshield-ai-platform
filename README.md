@@ -12,7 +12,7 @@
 [![ML](https://img.shields.io/badge/Isolation_Forest-Risk_Engine-FF6F00?style=for-the-badge)](./docs/ML_MODELS.md)
 [![Lakehouse](https://img.shields.io/badge/Medallion-Lakehouse-0078D4?style=for-the-badge)](./data/README.md)
 
-[Live Demo](#-quick-start) · [Architecture](./ARCHITECTURE.md) · [ML Models](./docs/ML_MODELS.md) · [API Reference](#-api-endpoints)
+[Quick Start](#quick-start) · [Platform Preview](#platform-preview) · [Deploy Live Demo](./docs/DEPLOY.md) · [Architecture](./ARCHITECTURE.md) · [ML Models](./docs/ML_MODELS.md) · [API Reference](#api-endpoints)
 
 </div>
 
@@ -214,6 +214,8 @@ Full diagram → **[ARCHITECTURE.md](./ARCHITECTURE.md)**
 
 ## Quick Start
 
+> **Nota:** O painel roda localmente (`localhost:5173`). O GitHub exibe as **screenshots** em [Platform Preview](#platform-preview) — para demo ao vivo, é preciso fazer deploy (ex.: Vercel) ou rodar localmente.
+
 ### 1 · Data pipeline (optional — gold JSON included)
 
 ```bash
@@ -266,6 +268,7 @@ node backend/scripts/validate-api.js
 | [docs/RECOVERY_REPORT.md](./docs/RECOVERY_REPORT.md) | Data recovery & lakehouse rebuild |
 | [docs/GIT_SAFE_WORKFLOW.md](./docs/GIT_SAFE_WORKFLOW.md) | Git best practices (Windows) |
 | [docs/LINKEDIN_POSITIONING.md](./docs/LINKEDIN_POSITIONING.md) | LinkedIn & portfolio copy |
+| [docs/DEPLOY.md](./docs/DEPLOY.md) | Deploy Vercel + Render (live demo link) |
 
 ---
 
