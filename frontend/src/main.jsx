@@ -8,6 +8,14 @@ import { FilterProvider } from './context/FilterContext.jsx';
 import { FraudDataProvider } from './context/FraudDataContext.jsx';
 import { ErrorBoundary } from './components/ui/ErrorBoundary.jsx';
 
+window.addEventListener('error', (event) => {
+  console.error('[Runtime:error]', event.message, event.error);
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+  console.error('[Runtime:unhandledrejection]', event.reason);
+});
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <ErrorBoundary>

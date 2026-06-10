@@ -74,7 +74,8 @@ function ChartCard({ title, subtitle, count, children, delay = 0 }) {
 
 function Heatmap({ data, isDark }) {
   const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-  const maxVal = Math.max(...data.map((d) => d.value), 1);
+  const safeData = Array.isArray(data) ? data : [];
+  const maxVal = Math.max(...safeData.map((d) => d?.value ?? 0), 1);
   const [hovered, setHovered] = useState(null);
 
   const getColor = (value) => {
@@ -106,7 +107,7 @@ function Heatmap({ data, isDark }) {
           <div key={day} className="mb-[2px] grid grid-cols-[32px_repeat(24,1fr)] gap-[2px]">
             <div className="flex items-center text-[10px] font-medium text-slate-500">{day}</div>
             {Array.from({ length: 24 }, (_, hour) => {
-              const cell = data.find((d) => d.day === day && d.hour === hour);
+              const cell = safeData.find((d) => d.day === day && d.hour === hour);
               const value = cell?.value ?? 0;
               return (
                 <div
@@ -150,20 +151,16 @@ export default function DashboardCharts({ hourData, categoryData, loading, varia
     );
   }
 
-  if (!hourData?.length && !categoryData?.length) {
-    return (
-      <EmptyState
-        icon={BarChart3}
-        title="No chart data"
-        description="Adjust filters or check API connection."
-      />
-    );
-  }
+  const safeHours = Array.isArray(hourData) ? hourData : [];
+  const safeCategories = Array.isArray(categoryData) ? categoryData : [];
+  const hasData = safeHours.some((h) => (h?.qtd_fraudes ?? 0) > 0)
+    || safeCategories.some((c) => (c?.qtd_fraudes ?? 0) > 0);
 
-  const hourlySeries = generateHourlySeries(hourData);
-  const categorySeries = generateVolumeSeries(categoryData).slice(0, 10);
-  const volumeTrend = generateVolumeTrend(categoryData);
-  const heatmapData = generateHeatmapData(hourData);
+  const hourlySeries = generateHourlySeries(safeHours);
+  const categorySeries = generateVolumeSeries(safeCategories).slice(0, 10);
+  const volumeTrend = generateVolumeTrend(safeCategories);
+  const heatmapData = generateHeatmapData(safeHours);
+  const chartMinHeight = 220;
 
   const gridStroke = isDark ? '#334155' : '#f1f5f9';
   const tickColor = isDark ? '#64748b' : '#94a3b8';
@@ -171,8 +168,14 @@ export default function DashboardCharts({ hourData, categoryData, loading, varia
   if (variant === 'overview') {
     return (
       <div className="grid grid-cols-1 gap-4 xl:grid-cols-2">
+        {!hasData && (
+          <div className="col-span-full rounded-lg border border-dashed border-slate-200 bg-slate-50/50 px-4 py-2 text-center text-[12px] text-slate-500 dark:border-slate-700 dark:bg-slate-800/50 dark:text-slate-400">
+            No chart data for current filters — showing empty chart axes. Check API connection or adjust filters.
+          </div>
+        )}
         <ChartCard title="Frauds by Hour" subtitle="24-hour timeline" delay={0}>
-          <ResponsiveContainer width="100%" height={220}>
+          <div style={{ width: '100%', minHeight: chartMinHeight, height: chartMinHeight }}>
+          <ResponsiveContainer width="100%" height={chartMinHeight}>
             <LineChart data={hourlySeries} margin={{ top: 5, right: 10, left: -10, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={gridStroke} />
               <XAxis dataKey="hour" tick={{ fontSize: 10, fill: tickColor }} tickLine={false} axisLine={false} interval={3} />
@@ -181,9 +184,11 @@ export default function DashboardCharts({ hourData, categoryData, loading, varia
               <Line type="monotone" dataKey="frauds" name="Frauds" stroke="#0891b2" strokeWidth={2} dot={false} activeDot={{ r: 5, fill: '#0891b2', stroke: '#fff', strokeWidth: 2 }} animationDuration={800} />
             </LineChart>
           </ResponsiveContainer>
+          </div>
         </ChartCard>
         <ChartCard title="Frauds by Category" subtitle="Top categories" delay={100}>
-          <ResponsiveContainer width="100%" height={220}>
+          <div style={{ width: '100%', minHeight: chartMinHeight, height: chartMinHeight }}>
+          <ResponsiveContainer width="100%" height={chartMinHeight}>
             <BarChart data={categorySeries} margin={{ top: 5, right: 10, left: -10, bottom: 0 }}>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke={gridStroke} />
               <XAxis dataKey="name" tick={{ fontSize: 9, fill: tickColor }} tickLine={false} axisLine={false} interval={0} angle={-35} textAnchor="end" height={50} />
@@ -196,6 +201,7 @@ export default function DashboardCharts({ hourData, categoryData, loading, varia
               </Bar>
             </BarChart>
           </ResponsiveContainer>
+          </div>
         </ChartCard>
       </div>
     );

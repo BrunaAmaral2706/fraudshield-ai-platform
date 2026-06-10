@@ -8,6 +8,12 @@ import {
   fetchModels,
   fetchAnalyticsSummary,
 } from '../services/api';
+import { ensureArray } from '../utils/safeData';
+
+function normalizeKpis(res) {
+  const rows = ensureArray(res, 'kpis');
+  return rows.length ? rows : null;
+}
 
 export const DEFAULT_FILTERS = {
   period: 'all',
@@ -74,17 +80,25 @@ export const useFraudStore = create((set, get) => ({
           fetchAnalyticsSummary(params),
         ]);
 
-      const catList = catRes?.map((c) => c.category || c.category_raw) ?? [];
+      const kpis = normalizeKpis(kpiRes);
+      const categoryData = ensureArray(catRes, 'categories');
+      const hourData = ensureArray(hourRes, 'hours');
+      const alerts = ensureArray(alertsRes, 'alerts');
+      const models = ensureArray(modelsRes, 'models');
+      const catList = categoryData.map((c) => c?.category || c?.category_raw).filter(Boolean);
 
       set({
-        kpis: kpiRes,
-        categoryData: catRes,
-        hourData: hourRes,
-        alerts: alertsRes,
-        models: modelsRes,
-        summary: summaryRes,
+        kpis,
+        categoryData,
+        hourData,
+        alerts,
+        models,
+        summary: summaryRes && typeof summaryRes === 'object' ? summaryRes : null,
         categories: ['all', ...new Set(catList)],
-        regions: summaryRes?.regions ?? ['all'],
+        regions: (() => {
+          const r = ensureArray(summaryRes?.regions, 'regions');
+          return r.length ? r : ['all'];
+        })(),
         loading: false,
         error: null,
       });

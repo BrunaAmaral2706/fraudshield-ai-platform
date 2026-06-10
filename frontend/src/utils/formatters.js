@@ -50,11 +50,12 @@ export function generateVolumeSeries(categoryData) {
 }
 
 export function generateHourlySeries(hourData) {
-  if (!hourData?.length) return [];
-  return hourData.map((item, i) => ({
-    hour: `${String(i).padStart(2, '0')}:00`,
-    frauds: item.qtd_fraudes ?? 0,
-  }));
+  const rows = Array.isArray(hourData) ? hourData : [];
+  const len = Math.max(rows.length, 24);
+  return Array.from({ length: len }, (_, i) => ({
+    hour: `${String(i % 24).padStart(2, '0')}:00`,
+    frauds: rows[i]?.qtd_fraudes ?? 0,
+  })).slice(0, 24);
 }
 
 export function generateHeatmapData(hourData) {

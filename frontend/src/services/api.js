@@ -2,6 +2,7 @@ import axios from 'axios';
 import * as staticApi from './staticApi';
 
 const DEBUG = import.meta.env.DEV;
+const LOG_API = import.meta.env.DEV || import.meta.env.VITE_LOG_API === 'true';
 
 export function useStaticApi() {
   if (import.meta.env.VITE_USE_STATIC_API === 'true') return true;
@@ -27,7 +28,7 @@ let retryCount = 0;
 const MAX_RETRIES = 2;
 
 function log(method, url, detail) {
-  if (DEBUG) {
+  if (LOG_API) {
     console.log(`[API] ${method.toUpperCase()} ${url}`, detail ?? '');
   }
 }
@@ -79,7 +80,12 @@ async function liveOrStatic(liveFn, staticFn, params) {
     if (DEBUG) log('static', liveFn.name || 'demo', params);
     return staticFn(params);
   }
-  return liveFn(params);
+  try {
+    return await liveFn(params);
+  } catch (err) {
+    console.warn('[API] Live request failed, falling back to static demo data:', err?.message);
+    return staticFn(params);
+  }
 }
 
 export const checkHealth = () =>

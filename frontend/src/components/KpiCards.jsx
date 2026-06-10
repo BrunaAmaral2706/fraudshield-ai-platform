@@ -14,6 +14,7 @@ import {
 import { SkeletonCard } from './ui/Skeleton';
 import AnimatedCard from './ui/AnimatedCard';
 import EmptyState from './ui/EmptyState';
+import { ensureArray } from '../utils/safeData';
 
 function KpiCard({ label, value, sub, trend, trendUp, accent, icon: Icon, delay = 0 }) {
   return (
@@ -102,10 +103,13 @@ export default function KpiCards({ kpis, alerts, summary, loading, empty }) {
     );
   }
 
-  const data = kpis[0];
+  const data = kpis[0] ?? {};
   const ml = summary?.ml_summary ?? {};
-  const activeAlerts = alerts?.length ?? 0;
-  const criticalAlerts = alerts?.filter((a) => a.severity === 'critical' || a.ai_severity === 'CRITICAL').length ?? 0;
+  const safeAlerts = ensureArray(alerts, 'kpi-alerts');
+  const activeAlerts = safeAlerts.length;
+  const criticalAlerts = safeAlerts.filter(
+    (a) => a?.severity === 'critical' || a?.ai_severity === 'CRITICAL',
+  ).length;
   const riskScore = ml.avg_risk_score ?? 0;
   const industryAvg = 0.42;
   const fraudRate = data.taxa_fraude ?? 0;
