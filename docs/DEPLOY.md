@@ -54,6 +54,9 @@ Vercel (frontend)  →  Render/Railway (backend API)
 | Name | Value |
 |------|-------|
 | `VITE_API_URL` | `https://SUA-URL.onrender.com` |
+| `VITE_BASE_PATH` | `/` (ou deixe vazio — **não** use `/fraudshield-ai-platform/` na Vercel) |
+
+> **Importante:** `VITE_BASE_PATH=/fraudshield-ai-platform/` é só para GitHub Pages. Na Vercel isso quebra o carregamento dos arquivos `.js` (tela branca + erro MIME type no console).
 
 5. Deploy → copie a URL: `https://fraudshield.vercel.app`
 

@@ -2,10 +2,11 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
-const repoBase = '/fraudshield-ai-platform/'
+// Vercel → base '/'. GitHub Pages → set VITE_BASE_PATH=/fraudshield-ai-platform/
+const base = process.env.VITE_BASE_PATH || '/'
 
-export default defineConfig(({ mode }) => ({
-  base: mode === 'production' ? repoBase : '/',
+export default defineConfig(() => ({
+  base,
   plugins: [react(), tailwindcss()],
   server: {
     proxy: {
