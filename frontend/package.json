@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview --base /fraudshield-ai-platform/"
   },
   "dependencies": {
     "axios": "^1.17.0",

@@ -1,7 +1,18 @@
 import axios from 'axios';
+import * as staticApi from './staticApi';
+
+const DEBUG = import.meta.env.DEV;
+
+export function useStaticApi() {
+  if (import.meta.env.VITE_USE_STATIC_API === 'true') return true;
+  if (typeof window === 'undefined') return import.meta.env.PROD;
+  return (
+    window.location.hostname.endsWith('github.io') ||
+    window.location.pathname.includes('/fraudshield-ai-platform')
+  );
+}
 
 const BASE_URL = import.meta.env.VITE_API_URL || '/api';
-const DEBUG = import.meta.env.DEV;
 
 const api = axios.create({
   baseURL: BASE_URL,
@@ -63,26 +74,86 @@ async function request(method, url, options = {}) {
   return res.data;
 }
 
-export const checkHealth = () => request('get', '/health');
+async function liveOrStatic(liveFn, staticFn, params) {
+  if (useStaticApi()) {
+    if (DEBUG) log('static', liveFn.name || 'demo', params);
+    return staticFn(params);
+  }
+  return liveFn(params);
+}
 
-export const fetchKpis = (params = {}) => request('get', '/kpis', { params });
+export const checkHealth = () =>
+  useStaticApi() ? staticApi.checkHealth() : request('get', '/health');
+
+export const fetchKpis = (params = {}) =>
+  liveOrStatic((p) => request('get', '/kpis', { params: p }), staticApi.fetchKpis, params);
+
 export const fetchFraudesCategorias = (params = {}) =>
-  request('get', '/fraudes/categorias', { params });
+  liveOrStatic(
+    (p) => request('get', '/fraudes/categorias', { params: p }),
+    staticApi.fetchFraudesCategorias,
+    params,
+  );
+
 export const fetchFraudesHorarios = (params = {}) =>
-  request('get', '/fraudes/horarios', { params });
+  liveOrStatic(
+    (p) => request('get', '/fraudes/horarios', { params: p }),
+    staticApi.fetchFraudesHorarios,
+    params,
+  );
+
 export const fetchTransactions = (params = {}) =>
-  request('get', '/transactions', { params });
-export const fetchAlerts = (params = {}) => request('get', '/alertas', { params });
-export const fetchModels = (params = {}) => request('get', '/modelos', { params });
+  liveOrStatic(
+    (p) => request('get', '/transactions', { params: p }),
+    staticApi.fetchTransactions,
+    params,
+  );
+
+export const fetchAlerts = (params = {}) =>
+  liveOrStatic((p) => request('get', '/alertas', { params: p }), staticApi.fetchAlerts, params);
+
+export const fetchModels = (params = {}) =>
+  liveOrStatic((p) => request('get', '/modelos', { params: p }), staticApi.fetchModels, params);
+
 export const fetchAnalyticsSummary = (params = {}) =>
-  request('get', '/analytics/summary', { params });
-export const fetchMlPipeline = () => request('get', '/ml/pipeline');
-export const fetchMlMetrics = () => request('get', '/ml/metrics');
-export const fetchRiskAnalysis = (params = {}) => request('get', '/risk-analysis', { params });
-export const fetchFraudInsights = (params = {}) => request('get', '/fraud-insights', { params });
-export const fetchAnomalies = (params = {}) => request('get', '/anomalies', { params });
-export const fetchDataAnalysis = () => request('get', '/data-analysis');
-export const fetchMlPredictions = (params = {}) => request('get', '/ml-predictions', { params });
+  liveOrStatic(
+    (p) => request('get', '/analytics/summary', { params: p }),
+    staticApi.fetchAnalyticsSummary,
+    params,
+  );
+
+export const fetchMlPipeline = () =>
+  useStaticApi() ? staticApi.fetchMlPipeline() : request('get', '/ml/pipeline');
+
+export const fetchMlMetrics = () =>
+  useStaticApi() ? staticApi.fetchMlMetrics() : request('get', '/ml/metrics');
+
+export const fetchRiskAnalysis = (params = {}) =>
+  liveOrStatic(
+    (p) => request('get', '/risk-analysis', { params: p }),
+    staticApi.fetchRiskAnalysis,
+    params,
+  );
+
+export const fetchFraudInsights = (params = {}) =>
+  liveOrStatic(
+    (p) => request('get', '/fraud-insights', { params: p }),
+    staticApi.fetchFraudInsights,
+    params,
+  );
+
+export const fetchAnomalies = (params = {}) =>
+  liveOrStatic((p) => request('get', '/anomalies', { params: p }), staticApi.fetchAnomalies, params);
+
+export const fetchDataAnalysis = () =>
+  useStaticApi() ? staticApi.fetchDataAnalysis() : request('get', '/data-analysis');
+
+export const fetchMlPredictions = (params = {}) =>
+  liveOrStatic(
+    (p) => request('get', '/ml-predictions', { params: p }),
+    staticApi.fetchMlPredictions,
+    params,
+  );
 
 /** Enterprise aliases */
 export const getKPIs = fetchKpis;
